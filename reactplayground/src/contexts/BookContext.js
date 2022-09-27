@@ -4,20 +4,15 @@ import {v1 as uuidv1} from 'uuid';
 export const BookContext = createContext();
 
 const BookContextProvider = (props) => {
-    const [books, setBooks] = useState([
-        {
-            id: uuidv1(),
-            title: 'El coronel no tiene quien le escriba.',
-            author: 'Gabriel García Márquez.'
-        },
-        {
-            id: uuidv1(),
-            title: 'El general en su laberinto.',
-            author: 'Gabriel García Márquez.'
-        }
-    ]);
+    const [books, setBooks] = useState([]);
+    const addBook = (title, author) => {
+        setBooks([...books,{title:title, author: author, id: uuidv1()}]);
+    };
+    const removeBook = (id) => {
+        setBooks(books.filter( book => book.id !== id));
+    };
     return ( 
-        <BookContext.Provider value={{books}}>
+        <BookContext.Provider value={{books, addBook, removeBook}}>
             {props.children}
         </BookContext.Provider>
         
