@@ -1,10 +1,10 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import { BookContext } from '../contexts/BookContext';
 
 const BookList = () => {
     const {books, dispatch} = useContext(BookContext);
     
-	return ( 
+	return books.length ? ( 
 		<div className='book-list'>
 			<ul>
 				{books.map( book => {                     
@@ -16,7 +16,9 @@ const BookList = () => {
 				)})}
 			</ul>
 		</div>
-	);
+	) : (
+		<div className='empty'>No hay libros en la lista</div>
+	)
 }
  
 export default BookList;
